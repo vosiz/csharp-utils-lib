@@ -1,19 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Diagnostics;
-using System.Runtime.InteropServices;
 
 namespace Vosiz.Utils.Windows
 {
-    public class GlobalKeyHook
+    public class GlobalKeyHook : IDisposable
     {
-
         private const int WH_KEYBOARD_LL = 13;
 
         [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
@@ -31,22 +25,21 @@ namespace Vosiz.Utils.Windows
 
         private delegate IntPtr LowLevelKeyboardProc(int nCode, IntPtr wParam, IntPtr lParam);
 
-        public bool Enabled = false;
-
         private IntPtr HookUd = IntPtr.Zero;
         private LowLevelKeyboardProc Process;
         private Action Callback;
-        private Keys[] Modifiers;
-        private Keys[] Keys;
+        private Keys[] KeysToWatch;
+        private Keys[] ModifiersToWatch;
+        public bool Enabled = false;
 
         public GlobalKeyHook(Action callback, Keys[] keys, Keys[] modifiers = null)
         {
             Process = HookCallback;
             Callback = callback;
+            KeysToWatch = keys;
+            ModifiersToWatch = modifiers ?? new Keys[0];
             HookUd = SetHook(Process);
             Enabled = true;
-            Modifiers = modifiers;
-            Keys = keys;
         }
 
         public void Dispose()
@@ -59,8 +52,7 @@ namespace Vosiz.Utils.Windows
             using (Process curProcess = System.Diagnostics.Process.GetCurrentProcess())
             using (ProcessModule curModule = curProcess.MainModule)
             {
-                return SetWindowsHookEx(WH_KEYBOARD_LL, proc,
-                    GetModuleHandle(curModule.ModuleName), 0);
+                return SetWindowsHookEx(WH_KEYBOARD_LL, proc, GetModuleHandle(curModule.ModuleName), 0);
             }
         }
 
@@ -71,22 +63,17 @@ namespace Vosiz.Utils.Windows
                 int vkCode = Marshal.ReadInt32(lParam);
                 Keys key = (Keys)vkCode;
 
-                bool isKeyDown = (wParam == (IntPtr)0x100 || wParam == (IntPtr)0x104); // WM_KEYDOWN or WM_SYSKEYDOWN
+                bool ctrlPressed = (Control.ModifierKeys & Keys.Control) != 0;
+                bool modsPressed = ModifiersToWatch.All(mod => (Control.ModifierKeys & mod) != 0);
+                bool keyPressed = KeysToWatch.Contains(key);
 
-                if (isKeyDown)
+                if (modsPressed && keyPressed)
                 {
-                    bool modsPressed = Modifiers == null || Modifiers.All(mod => (Control.ModifierKeys & mod) != 0);
-                    bool keyPressed = Keys != null && Keys.Contains(key);
-
-                    if (keyPressed && modsPressed)
-                    {
-                        Callback?.Invoke();
-                    }
+                    Callback?.Invoke();
+                    return (IntPtr)1;  // Optionally block the keypress
                 }
             }
-
             return CallNextHookEx(HookUd, nCode, wParam, lParam);
         }
-
     }
 }
