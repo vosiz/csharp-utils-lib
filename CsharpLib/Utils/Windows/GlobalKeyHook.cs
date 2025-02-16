@@ -8,52 +8,71 @@ namespace Vosiz.Utils.Windows
 {
     public class GlobalKeyHook : IDisposable
     {
-        private const int WH_KEYBOARD_LL = 13;
+        private static IntPtr HookId = IntPtr.Zero;
+        private static LowLevelKeyboardProc HookProc;
 
-        [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        private static extern IntPtr SetWindowsHookEx(int idHook, LowLevelKeyboardProc lpfn, IntPtr hMod, uint dwThreadId);
-
-        [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        private static extern bool UnhookWindowsHookEx(IntPtr hhk);
-
-        [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        private static extern IntPtr CallNextHookEx(IntPtr hhk, int nCode, IntPtr wParam, IntPtr lParam);
-
-        [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        private static extern IntPtr GetModuleHandle(string lpModuleName);
+        private const int WHKEYBOARDLL = 13;
 
         private delegate IntPtr LowLevelKeyboardProc(int nCode, IntPtr wParam, IntPtr lParam);
 
-        private IntPtr HookUd = IntPtr.Zero;
-        private LowLevelKeyboardProc Process;
-        private Action Callback;
-        private Keys[] KeysToWatch;
-        private Keys[] ModifiersToWatch;
-        public bool Enabled = false;
+        public bool Enabled { get; private set; } = false;
+
+        private readonly Action Callback;
+        private readonly Keys[] KeysToWatch;
+        private readonly Keys[] ModifiersToWatch;
+
+        [DllImport("user32.dll", SetLastError = true)]
+        private static extern IntPtr SetWindowsHookEx(int idHook, LowLevelKeyboardProc lpfn, IntPtr hMod, uint dwThreadId);
+
+        [DllImport("user32.dll", SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        private static extern bool UnhookWindowsHookEx(IntPtr hhk);
+
+        [DllImport("user32.dll", SetLastError = true)]
+        private static extern IntPtr CallNextHookEx(IntPtr hhk, int nCode, IntPtr wParam, IntPtr lParam);
+
+        [DllImport("kernel32.dll", SetLastError = true)]
+        private static extern IntPtr GetModuleHandle(string lpModuleName);
 
         public GlobalKeyHook(Action callback, Keys[] keys, Keys[] modifiers = null)
         {
-            Process = HookCallback;
+            HookProc = HookCallback;  // Prevents GC from collecting the delegate
             Callback = callback;
             KeysToWatch = keys;
-            ModifiersToWatch = modifiers ?? new Keys[0];
-            HookUd = SetHook(Process);
-            Enabled = true;
+            ModifiersToWatch = modifiers ?? Array.Empty<Keys>();
+
+            HookId = SetHook(HookProc);
+            Enabled = HookId != IntPtr.Zero;
         }
+
 
         public void Dispose()
         {
-            UnhookWindowsHookEx(HookUd);
+            if (HookId != IntPtr.Zero)
+            {
+                UnhookWindowsHookEx(HookId);
+                HookId = IntPtr.Zero;
+                Enabled = false;
+            }
         }
 
-        private IntPtr SetHook(LowLevelKeyboardProc proc)
+        private static IntPtr SetHook(LowLevelKeyboardProc proc)
         {
-            using (Process curProcess = System.Diagnostics.Process.GetCurrentProcess())
-            using (ProcessModule curModule = curProcess.MainModule)
+            IntPtr moduleHandle = GetModuleHandle(Process.GetCurrentProcess().MainModule.ModuleName);
+
+            if (moduleHandle == IntPtr.Zero)
             {
-                return SetWindowsHookEx(WH_KEYBOARD_LL, proc, GetModuleHandle(curModule.ModuleName), 0);
+                MessageBox.Show("Error: Could not get module handle!", "Hook Error");
+                return IntPtr.Zero;
             }
+
+            IntPtr hookId = SetWindowsHookEx(WHKEYBOARDLL, proc, moduleHandle, 0);
+            if (hookId == IntPtr.Zero)
+            {
+                MessageBox.Show("Error: Hook could not be set!", "Hook Error");
+            }
+
+            return hookId;
         }
 
         private IntPtr HookCallback(int nCode, IntPtr wParam, IntPtr lParam)
@@ -62,18 +81,17 @@ namespace Vosiz.Utils.Windows
             {
                 int vkCode = Marshal.ReadInt32(lParam);
                 Keys key = (Keys)vkCode;
+                bool allModifiersPressed = ModifiersToWatch.All(mod => (Control.ModifierKeys & mod) != 0);
 
-                bool ctrlPressed = (Control.ModifierKeys & Keys.Control) != 0;
-                bool modsPressed = ModifiersToWatch.All(mod => (Control.ModifierKeys & mod) != 0);
-                bool keyPressed = KeysToWatch.Contains(key);
-
-                if (modsPressed && keyPressed)
+                if (KeysToWatch.Contains(key) && allModifiersPressed)
                 {
                     Callback?.Invoke();
-                    return (IntPtr)1;  // Optionally block the keypress
                 }
             }
-            return CallNextHookEx(HookUd, nCode, wParam, lParam);
+
+            return CallNextHookEx(HookId, nCode, wParam, lParam);
         }
+
+
     }
 }
