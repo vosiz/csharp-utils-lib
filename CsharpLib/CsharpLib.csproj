@@ -7,7 +7,7 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <Version>1.1.3</Version>
+    <Version>1.2.0</Version>
     <Description>Collections of utils, wrappers and helpers for C#</Description>
     <AssemblyName>Vosiz.UtilsLib</AssemblyName>
     <RootNamespace>Vosiz</RootNamespace>
