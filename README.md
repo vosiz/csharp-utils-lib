@@ -1,8 +1,4 @@
-# csharp-utils-lib
-C# library - utils, commons, tools and helpers
+# C# Utils library
+Created by Vosiz
 
-For C#
-- Unity 3D
-- Winforms
-- WPF
-etc...
+Designed for unification and private usage. Feel free to use it as you want
