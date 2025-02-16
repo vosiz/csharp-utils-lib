@@ -66,51 +66,27 @@ namespace Vosiz.Utils.Windows
 
         private IntPtr HookCallback(int nCode, IntPtr wParam, IntPtr lParam)
         {
-
             if (nCode >= 0 && Enabled)
             {
-                // read
                 int vkCode = Marshal.ReadInt32(lParam);
+                Keys key = (Keys)vkCode;
 
-                var mods_pressed = true;
-                if (Modifiers.Length > 0)
+                bool isKeyDown = (wParam == (IntPtr)0x100 || wParam == (IntPtr)0x104); // WM_KEYDOWN or WM_SYSKEYDOWN
+
+                if (isKeyDown)
                 {
+                    bool modsPressed = Modifiers == null || Modifiers.All(mod => (Control.ModifierKeys & mod) != 0);
+                    bool keyPressed = Keys != null && Keys.Contains(key);
 
-                    foreach (var mod in Modifiers)
+                    if (keyPressed && modsPressed)
                     {
-
-                        if ((Control.ModifierKeys & mod) == 0)
-                        {
-                            mods_pressed = false;
-                        }
+                        Callback?.Invoke();
                     }
                 }
-
-                var key_pressed = false;
-                if (Modifiers.Length > 0)
-                {
-
-                    foreach (var k in Keys)
-                    {
-
-                        if ((Keys)vkCode == k)
-                        {
-                            key_pressed = true;
-                            break;
-                        }
-                    }
-                }
-
-                if (key_pressed && mods_pressed)
-                {
-                    Callback?.Invoke();
-                }
-
             }
 
             return CallNextHookEx(HookUd, nCode, wParam, lParam);
         }
-
 
     }
 }

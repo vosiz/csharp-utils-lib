@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net4.8-windows</TargetFramework>
@@ -7,7 +7,7 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <Version>1.1.0</Version>
+    <Version>1.1.1</Version>
     <Description>Collections of utils, wrappers and helpers for C#</Description>
     <AssemblyName>Vosiz.UtilsLib</AssemblyName>
     <RootNamespace>Vosiz</RootNamespace>
