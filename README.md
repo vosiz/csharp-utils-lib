@@ -22,6 +22,7 @@ Designed for unification and private usage. Feel free to use it as you want
 ### Helpers
 - Enums
 - Files
+- Ini
 - Paths
 - Time
 - Xml
@@ -29,5 +30,4 @@ Designed for unification and private usage. Feel free to use it as you want
 ### Utilities
 - Archive (zip, not recommended yet)
 - Randomizer (randomity driver)
-
 
