@@ -6,3 +6,5 @@ For C#
 - Winforms
 - WPF
 etc...
+
+4.8 .Net compatible

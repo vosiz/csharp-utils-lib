@@ -3,15 +3,31 @@ Created by Vosiz
 
 Designed for unification and private usage. Feel free to use it as you want
 
-## Parts
+## Content
+### Root
+- Basic enums
+
 ### Commons
-- Assertion - assertion OnNull, OnType
-- Exceptions - Formatted, Wrapper
-- Retval - return value
+- Assertion
+- Exceptions
+- Retval (Return value)
+
+### Extensions
+- Binary (byte array)
+- Collections (various)
+- Enums
+- Integer
+- String
 
 ### Helpers
-- File - copy whole directory
-- path - user profile, application data, combine paths
+- Enums
+- Files
+- Paths
+- Time
+- Xml
 
-### Utils
-- archive - to zip
+### Utilities
+- Archive (zip, not recommended yet)
+- Randomizer (randomity driver)
+
+
