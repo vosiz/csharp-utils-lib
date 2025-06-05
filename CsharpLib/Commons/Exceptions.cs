@@ -10,14 +10,25 @@ namespace Vosiz.Commons
     {
         public Exceptionf(string fmt, params object[] pars) :
             base(string.Format(fmt, pars)) { }
+
+        public Exceptionf(Exception exc) :
+            base(exc.Message) { }
     }
 
-    internal class WrapperException : Exception {
+    public class FormattedException : Exceptionf 
+    {
+        public FormattedException(string fmt, params object[] pars) :
+            base(string.Format(fmt, pars)) { }
+    }
 
-        public WrapperException(string msg) : base("Library-Wrapper.exc: " + msg) { }
+    public class NotException : Exception
+    {
+        public NotException(string message) : base(message) { }
+    }
 
-        public WrapperException(Exception exc) : this(exc.Message) { }
-
-
+    public class UnimplementedStateException : FormattedException
+    {
+        public UnimplementedStateException(object state)
+            : base("Unimplemented state {0}", state.ToString()) { }
     }
 }
