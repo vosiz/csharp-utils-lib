@@ -7,9 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Vosiz.Commons;
 
-namespace Vosiz.Utils.Extends
+namespace Vosiz.Extends
 {
-    public static class Enums
+    public static class EnumExt
     {
         public static string GetDescription(this Enum value)
         {
