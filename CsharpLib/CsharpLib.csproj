@@ -1,14 +1,17 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net4.8-windows</TargetFramework>
+    <TargetFrameworks>netstandard2.0;net48</TargetFrameworks>
     <UseWindowsForms>true</UseWindowsForms>
     <Authors>Petr "Vosiz" Vosoust</Authors>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <Version>1.4.0</Version>
-    <Description>Collections of utils, wrappers and helpers for C#</Description>
+    <Version>1.5.0</Version>
+    <Description>Collections of utils, wrappers and helpers for C#
+
+Contributors:
+- Martin Votypka (@Votypka-Martin)</Description>
     <AssemblyName>Vosiz.UtilsLib</AssemblyName>
     <RootNamespace>Vosiz</RootNamespace>
     <PackageProjectUrl>https://github.com/vosiz/csharp-utils-lib</PackageProjectUrl>

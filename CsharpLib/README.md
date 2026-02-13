@@ -8,3 +8,4 @@ For C#
 etc...
 
 4.8 .Net compatible
+2.0 .Net standard compatibie
