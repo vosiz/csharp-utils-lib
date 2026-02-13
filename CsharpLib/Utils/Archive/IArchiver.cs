@@ -12,6 +12,12 @@ namespace Vosiz.Utils.Archive
 
         Retval ArchiveFiles(string[] filepaths, string zipfilepath);
 
+        //Task ArchiveFiles(string[] filepaths, string zipfilepath, IProgress<int> progress);
+
         Retval ArchiveFolder(string dirpath, string zipfilepath);
+
+        //Task ArchiveFolder(string dirpath, string zipfilepath, IProgress<int> progress);
+
+
     }
 }

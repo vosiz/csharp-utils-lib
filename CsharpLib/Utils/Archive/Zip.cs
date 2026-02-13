@@ -29,9 +29,14 @@ namespace Vosiz.Utils.Archive
 
             } catch (Exception exc)
             {
-                throw new WrapperException(exc);
+                throw new Exceptionf(exc);
             }
         }
+
+        //public Task ArchiveFiles(string[] filepaths, string zipfilepath, IProgress<int> progress)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         public Retval ArchiveFolder(string dirpath, string zipfilepath)
         {
@@ -42,9 +47,14 @@ namespace Vosiz.Utils.Archive
             }
             catch (Exception exc) {
 
-                throw new WrapperException(exc);
+                throw new Exceptionf(exc);
             }
             
         }
+
+        //public Task ArchiveFolder(string dirpath, string zipfilepath, IProgress<int> progress)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }
