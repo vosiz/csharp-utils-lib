@@ -45,12 +45,22 @@ namespace Vosiz.Extends
         }
 
         /// dictionaries
-        public static bool TryAdd<TKey, TValue>(this Dictionary<TKey, TValue> dict, TKey key, TValue val)
+        public static bool TryAdd<TKey, TValue>(this Dictionary<TKey, TValue> dict, TKey key, TValue val, bool update = false)
         {
 
-            if (dict.ContainsKey(key))
-                return false;
+            if (dict.ContainsKey(key)) {
 
+                if (update)
+                {
+                    dict[key] = val;
+                    return true;
+                }
+                else {
+
+                    return false;
+                }
+            }
+                
             dict.Add(key, val);
             return true;
         }
