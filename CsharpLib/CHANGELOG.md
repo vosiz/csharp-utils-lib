@@ -1,12 +1,17 @@
 # Change log
 ## Current version
+### 1.5.1 - Limited class
+- general limited (min, max)
+- limited number
+
+## History
 ### 1.5.0 - fixes and 2.0std
 - archivation - removed non-working methods
 - deprecated low key hooking
 - CollectionExt.TryUpdate extended
 - 2.0 netstandard compatibility
 
-## History
+
 ### 1.4.1 - Extends
 - update option to adding value to dictionary
 
