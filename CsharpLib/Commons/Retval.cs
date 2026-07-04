@@ -41,8 +41,8 @@ namespace Vosiz.Commons
 
         public static Retval Np => Create(RetvalType.NoProblem, string.Empty);
 
-        RetvalType Type;
-        string Message;
+        public RetvalType Type { get; private set; }
+        public string Message { get; private set; }
 
 
         protected Retval(RetvalType type, string msg) {
@@ -54,6 +54,11 @@ namespace Vosiz.Commons
         public static Retval Create(RetvalType type, string msg) {
 
             return new Retval(type, msg);
+        }
+
+        public override string ToString() {
+
+            return string.Format("[{0}]: {1}", Type, Message);
         }
 
     }
