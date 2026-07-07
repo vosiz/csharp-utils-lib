@@ -7,9 +7,9 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <Version>1.5.2</Version>
-    <AssemblyVersion>1.5.2.0</AssemblyVersion>
-    <FileVersion>1.5.2.0</FileVersion>
+    <Version>1.6.0</Version>
+    <AssemblyVersion>1.6.0.0</AssemblyVersion>
+    <FileVersion>1.6.0.0</FileVersion>
     <Description>Collections of utils, wrappers and helpers for C#
 
 Contributors:
