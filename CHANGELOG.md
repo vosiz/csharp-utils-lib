@@ -5,6 +5,7 @@
 ### 1.6.0 - Units and quantities
 - add: Unit, Quantity, SiPrefix
 - add: Presets.Unit, Presets.Quantity
+- add: Tests project, reflection-based runner
 
 ## History
 
