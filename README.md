@@ -11,6 +11,12 @@ Designed for unification and private usage. Feel free to use it as you want
 - Assertion
 - Exceptions
 - Retval (Return value)
+- Limited / LimitedNumber (min/max bounded value)
+- Unit / Quantity (with SI prefix conversion)
+
+### Presets
+- Unit (Kelvin, Ampere, Volt, Meter)
+- Quantity (Temperature, Current, Voltage, Length)
 
 ### Extensions
 - Binary (byte array)
