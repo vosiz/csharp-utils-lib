@@ -11,7 +11,7 @@ namespace Vosiz.Utils
 {
     public static class Randomizer
     {
-        private static Random RandGen;
+        private static Random RandGen = new Random((int)DateTime.Now.Ticks);
 
         public static void Init()
         {

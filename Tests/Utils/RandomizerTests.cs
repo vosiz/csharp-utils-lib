@@ -7,6 +7,14 @@ namespace Tests.Utils
     public static class RandomizerTests
     {
 
+        // Next produces a value without ever calling Init() explicitly first
+        public static void NextWorksWithoutExplicitInit() {
+
+            int value = Randomizer.Next(10);
+
+            Check.True(value >= 0 && value < 10, "value out of range");
+        }
+
         // Next with a min and max stays within the inclusive/exclusive bounds
         public static void NextWithRangeStaysWithinBounds() {
 

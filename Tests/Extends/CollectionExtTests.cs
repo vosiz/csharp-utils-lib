@@ -41,11 +41,21 @@ namespace Tests.Extends
             Check.Equal(typeof(int), values.GetItemType());
         }
 
-        // AsArray currently ignores the extra items (see IDEAS.md - AddRange result is discarded)
-        public static void AsArrayIgnoresExtraItems() {
+        // AsArray appends the extra items to the returned array
+        public static void AsArrayIncludesExtraItems() {
 
             List<int> values = new List<int> { 1, 2 };
             int[] result = values.AsArray(3, 4);
+
+            Check.Equal(4, result.Length);
+            Check.True(result[2] == 3 && result[3] == 4, "Extra items should be appended in order");
+        }
+
+        // AsArray without extra items behaves like a plain ToArray
+        public static void AsArrayWithoutExtraItemsReturnsSameValues() {
+
+            List<int> values = new List<int> { 1, 2 };
+            int[] result = values.AsArray();
 
             Check.Equal(2, result.Length);
         }

@@ -1,6 +1,5 @@
 using System;
 using System.Reflection;
-using Vosiz.Utils;
 
 namespace Tests
 {
@@ -8,8 +7,6 @@ namespace Tests
     {
         static void Main(string[] args)
         {
-            Randomizer.Init();
-
             TestRunner.RunAll(Assembly.GetExecutingAssembly());
 
             Console.ReadLine();

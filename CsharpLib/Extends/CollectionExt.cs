@@ -33,10 +33,12 @@ namespace Vosiz.Extends
         public static T[] AsArray<T>(this IEnumerable<T> list, params T[] items)
         {
 
-            if (items.Length > 0)
-                list.ToList().AddRange(items);
+            var result = list.ToList();
 
-            return list.ToArray();
+            if (items.Length > 0)
+                result.AddRange(items);
+
+            return result.ToArray();
         }
 
         public static string Implode<T>(this IEnumerable<T> list, string separator = ", ") where T : IConvertible
