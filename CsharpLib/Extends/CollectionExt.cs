@@ -46,6 +46,28 @@ namespace Vosiz.Extends
             return string.Join(separator, list);
         }
 
+        // Returns the item that follows the given one, wrapping back to the first
+        public static T NextAfter<T>(this IEnumerable<T> collection, T current)
+        {
+
+            if (collection == null)
+                throw new ArgumentNullException(nameof(collection));
+
+            var list = collection.ToList();
+
+            if (list.Count == 0)
+                throw new InvalidOperationException("Collection is empty");
+
+            int index = list.IndexOf(current);
+
+            if (index == -1)
+                throw new ArgumentException("Selected element is not in the collection.", nameof(current));
+
+            int next_index = (index + 1) % list.Count;
+
+            return list[next_index];
+        }
+
         /// dictionaries
         public static bool TryAdd<TKey, TValue>(this Dictionary<TKey, TValue> dict, TKey key, TValue val, bool update = false)
         {

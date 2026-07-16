@@ -60,6 +60,46 @@ namespace Tests.Extends
             Check.Equal(2, result.Length);
         }
 
+        // NextAfter returns the following item in sequence
+        public static void NextAfterReturnsFollowingItem() {
+
+            List<int> values = new List<int> { 1, 2, 3 };
+
+            Check.Equal(2, values.NextAfter(1));
+        }
+
+        // NextAfter wraps back to the first item after the last one
+        public static void NextAfterWrapsToFirstItem() {
+
+            List<int> values = new List<int> { 1, 2, 3 };
+
+            Check.Equal(1, values.NextAfter(3));
+        }
+
+        // NextAfter throws for a null collection
+        public static void NextAfterThrowsForNullCollection() {
+
+            List<int> values = null;
+
+            Check.Throws<ArgumentNullException>(() => values.NextAfter(1));
+        }
+
+        // NextAfter throws for an empty collection
+        public static void NextAfterThrowsForEmptyCollection() {
+
+            List<int> values = new List<int>();
+
+            Check.Throws<InvalidOperationException>(() => values.NextAfter(1));
+        }
+
+        // NextAfter throws when the given item is not part of the collection
+        public static void NextAfterThrowsForMissingItem() {
+
+            List<int> values = new List<int> { 1, 2, 3 };
+
+            Check.Throws<ArgumentException>(() => values.NextAfter(99));
+        }
+
         // Implode joins values with the given separator
         public static void ImplodeJoinsValuesWithSeparator() {
 

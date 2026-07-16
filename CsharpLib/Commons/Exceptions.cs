@@ -31,4 +31,10 @@ namespace Vosiz.Commons
         public UnimplementedStateException(object state)
             : base("Unimplemented state {0}", state.ToString()) { }
     }
+
+    public class MessageException : Exception
+    {
+        public MessageException(string message, Exception inner_exc) :
+            base($"{message}: {inner_exc.Message}", inner_exc) { }
+    }
 }

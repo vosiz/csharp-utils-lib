@@ -40,5 +40,24 @@ namespace Vosiz.Extends
 
             return str.Substring(index, length);
         }
+
+        // Attempts to parse the string as an enum value of the given type, without throwing
+        public static bool TryParseEnum(this string value, Type enum_type, bool ignore_case, out object result)
+        {
+
+            if (!enum_type.IsEnum)
+                throw new ArgumentException("Type must be enum", nameof(enum_type));
+
+            try
+            {
+                result = Enum.Parse(enum_type, value, ignore_case);
+                return true;
+            }
+            catch
+            {
+                result = null;
+                return false;
+            }
+        }
     }
 }

@@ -142,6 +142,13 @@ namespace Vosiz.Utils
             return (T)GenerateRandom(typeof(T));
         }
 
+        // Returns one random value from the given set
+        public static T Choice<T>(params T[] values)
+        {
+
+            return values[Next(values.Length)];
+        }
+
         private static object GenerateRandom(Type type, int depth = 0)
         {
             if (depth > 10) return GetDefaultValue(type);
