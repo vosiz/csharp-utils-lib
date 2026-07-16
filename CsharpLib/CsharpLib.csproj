@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net48</TargetFrameworks>
-    <UseWindowsForms>true</UseWindowsForms>
+    <UseWindowsForms Condition="'$(TargetFramework)' == 'net48'">true</UseWindowsForms>
     <Authors>Petr "Vosiz" Vosoust</Authors>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
@@ -28,7 +28,7 @@ Contributors:
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="ini-parser" Version="2.5.2" />
+    <PackageReference Include="ini-parser-netstandard" Version="2.5.3" />
     <PackageReference Include="System.IO.Compression" Version="4.3.0" />
   </ItemGroup>
 
