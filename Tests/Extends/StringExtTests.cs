@@ -62,5 +62,37 @@ namespace Tests.Extends
             Check.Equal(string.Empty, "abc".RandomSubstring(10));
         }
 
+        // TryParseEnum parses a valid value
+        public static void TryParseEnumParsesValidValue() {
+
+            bool ok = "Monday".TryParseEnum(typeof(DayOfWeek), false, out object result);
+
+            Check.True(ok, "Should successfully parse");
+            Check.Equal(DayOfWeek.Monday, result);
+        }
+
+        // TryParseEnum honors ignore_case
+        public static void TryParseEnumHonorsIgnoreCase() {
+
+            bool ok = "monday".TryParseEnum(typeof(DayOfWeek), true, out object result);
+
+            Check.True(ok, "Should successfully parse with ignored case");
+            Check.Equal(DayOfWeek.Monday, result);
+        }
+
+        // TryParseEnum returns false for an invalid value
+        public static void TryParseEnumReturnsFalseForInvalidValue() {
+
+            bool ok = "NotADay".TryParseEnum(typeof(DayOfWeek), false, out object result);
+
+            Check.False(ok, "Should fail to parse");
+        }
+
+        // TryParseEnum throws when the given type is not an enum
+        public static void TryParseEnumThrowsForNonEnumType() {
+
+            Check.Throws<ArgumentException>(() => "value".TryParseEnum(typeof(string), false, out object result));
+        }
+
     }
 }

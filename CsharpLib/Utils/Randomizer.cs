@@ -11,7 +11,7 @@ namespace Vosiz.Utils
 {
     public static class Randomizer
     {
-        private static Random RandGen;
+        private static Random RandGen = new Random((int)DateTime.Now.Ticks);
 
         public static void Init()
         {
@@ -140,6 +140,13 @@ namespace Vosiz.Utils
         public static T Next<T>()
         {
             return (T)GenerateRandom(typeof(T));
+        }
+
+        // Returns one random value from the given set
+        public static T Choice<T>(params T[] values)
+        {
+
+            return values[Next(values.Length)];
         }
 
         private static object GenerateRandom(Type type, int depth = 0)

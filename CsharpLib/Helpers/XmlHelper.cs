@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 
 namespace Vosiz.Helpers
 {
-    public static class XmlHlper
+    public static class XmlHelper
     {
         public static string ToXml(object obj)
         {

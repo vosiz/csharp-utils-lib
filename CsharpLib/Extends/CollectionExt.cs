@@ -33,15 +33,39 @@ namespace Vosiz.Extends
         public static T[] AsArray<T>(this IEnumerable<T> list, params T[] items)
         {
 
-            if (items.Length > 0)
-                list.ToList().AddRange(items);
+            var result = list.ToList();
 
-            return list.ToArray();
+            if (items.Length > 0)
+                result.AddRange(items);
+
+            return result.ToArray();
         }
 
         public static string Implode<T>(this IEnumerable<T> list, string separator = ", ") where T : IConvertible
         {
             return string.Join(separator, list);
+        }
+
+        // Returns the item that follows the given one, wrapping back to the first
+        public static T NextAfter<T>(this IEnumerable<T> collection, T current)
+        {
+
+            if (collection == null)
+                throw new ArgumentNullException(nameof(collection));
+
+            var list = collection.ToList();
+
+            if (list.Count == 0)
+                throw new InvalidOperationException("Collection is empty");
+
+            int index = list.IndexOf(current);
+
+            if (index == -1)
+                throw new ArgumentException("Selected element is not in the collection.", nameof(current));
+
+            int next_index = (index + 1) % list.Count;
+
+            return list[next_index];
         }
 
         /// dictionaries

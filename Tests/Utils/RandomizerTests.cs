@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using Vosiz.Utils;
 
 namespace Tests.Utils
@@ -6,6 +7,14 @@ namespace Tests.Utils
 
     public static class RandomizerTests
     {
+
+        // Next produces a value without ever calling Init() explicitly first
+        public static void NextWorksWithoutExplicitInit() {
+
+            int value = Randomizer.Next(10);
+
+            Check.True(value >= 0 && value < 10, "value out of range");
+        }
 
         // Next with a min and max stays within the inclusive/exclusive bounds
         public static void NextWithRangeStaysWithinBounds() {
@@ -139,6 +148,21 @@ namespace Tests.Utils
             int value = Randomizer.Next<int>();
 
             Check.True(value >= 0 && value < 1000, "value out of expected generated range");
+        }
+
+        // Choice returns one of the given values
+        public static void ChoiceReturnsOneOfGivenValues() {
+
+            int[] options = { 10, 20, 30 };
+            int value = Randomizer.Choice(options);
+
+            Check.True(options.Contains(value), "Choice should return one of the provided values");
+        }
+
+        // Choice with a single value always returns that value
+        public static void ChoiceWithSingleValueReturnsThatValue() {
+
+            Check.Equal(42, Randomizer.Choice(42));
         }
 
     }

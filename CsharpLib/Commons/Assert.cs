@@ -40,8 +40,32 @@ namespace Vosiz.Commons
         public static void OnType(object obj, Type type)
         {
 
+            if (obj == null)
+                throw new AssertException("Object is null");
+
             if (obj.GetType() != type)
                 throw new AssertException("Object is not typeof {0}, found {1}", type.ToString(), obj.GetType().ToString());
+        }
+
+        public static void OnTrue(bool condition)
+        {
+
+            if (!condition)
+                throw new AssertException("Condition is not true");
+        }
+
+        public static void OnFalse(bool condition)
+        {
+
+            if (condition)
+                throw new AssertException("Condition is not false");
+        }
+
+        public static void OnEqual<T>(T expected, T actual)
+        {
+
+            if (!Equals(expected, actual))
+                throw new AssertException("Expected {0}, found {1}", expected?.ToString(), actual?.ToString());
         }
     }
 }

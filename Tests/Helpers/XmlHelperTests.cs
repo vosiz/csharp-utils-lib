@@ -13,14 +13,14 @@ namespace Tests.Helpers
         public XmlSampleData() { }
     }
 
-    public static class XmlHlperTests
+    public static class XmlHelperTests
     {
 
         // ToXml serializes an object into an XML string containing its data
         public static void ToXmlSerializesObject() {
 
             XmlSampleData data = new XmlSampleData { Name = "test", Value = 42 };
-            string xml = XmlHlper.ToXml(data);
+            string xml = XmlHelper.ToXml(data);
 
             Check.True(xml.Contains("<Name>test</Name>"), "XML should contain the Name element");
             Check.True(xml.Contains("<Value>42</Value>"), "XML should contain the Value element");
@@ -30,9 +30,9 @@ namespace Tests.Helpers
         public static void FromXmlGenericRoundTrips() {
 
             XmlSampleData original = new XmlSampleData { Name = "test", Value = 42 };
-            string xml = XmlHlper.ToXml(original);
+            string xml = XmlHelper.ToXml(original);
 
-            XmlSampleData result = XmlHlper.FromXml<XmlSampleData>(xml);
+            XmlSampleData result = XmlHelper.FromXml<XmlSampleData>(xml);
 
             Check.Equal("test", result.Name);
             Check.Equal(42, result.Value);
@@ -42,9 +42,9 @@ namespace Tests.Helpers
         public static void FromXmlWithTypeRoundTrips() {
 
             XmlSampleData original = new XmlSampleData { Name = "test", Value = 42 };
-            string xml = XmlHlper.ToXml(original);
+            string xml = XmlHelper.ToXml(original);
 
-            XmlSampleData result = (XmlSampleData)XmlHlper.FromXml(xml, typeof(XmlSampleData));
+            XmlSampleData result = (XmlSampleData)XmlHelper.FromXml(xml, typeof(XmlSampleData));
 
             Check.Equal("test", result.Name);
             Check.Equal(42, result.Value);

@@ -31,5 +31,47 @@ namespace Tests.Commons
             Assert.OnType("string value", typeof(string));
         }
 
+        // OnType throws AssertException (not NullReferenceException) for a null object
+        public static void OnTypeThrowsForNull() {
+
+            Check.Throws<AssertException>(() => Assert.OnType(null, typeof(string)));
+        }
+
+        // OnTrue throws for a false condition
+        public static void OnTrueThrowsForFalse() {
+
+            Check.Throws<AssertException>(() => Assert.OnTrue(false));
+        }
+
+        // OnTrue does not throw for a true condition
+        public static void OnTrueDoesNotThrowForTrue() {
+
+            Assert.OnTrue(true);
+        }
+
+        // OnFalse throws for a true condition
+        public static void OnFalseThrowsForTrue() {
+
+            Check.Throws<AssertException>(() => Assert.OnFalse(true));
+        }
+
+        // OnFalse does not throw for a false condition
+        public static void OnFalseDoesNotThrowForFalse() {
+
+            Assert.OnFalse(false);
+        }
+
+        // OnEqual throws for unequal values
+        public static void OnEqualThrowsForUnequalValues() {
+
+            Check.Throws<AssertException>(() => Assert.OnEqual(1, 2));
+        }
+
+        // OnEqual does not throw for equal values
+        public static void OnEqualDoesNotThrowForEqualValues() {
+
+            Assert.OnEqual(1, 1);
+        }
+
     }
 }

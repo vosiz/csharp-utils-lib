@@ -48,5 +48,14 @@ namespace Tests.Commons
             Check.Equal("Unimplemented state Idle", exc.Message);
         }
 
+        // MessageException combines the message with the caught exception's message
+        public static void MessageExceptionCombinesMessages() {
+
+            InvalidOperationException inner = new InvalidOperationException("bad state");
+            MessageException exc = new MessageException("Operation failed", inner);
+
+            Check.Equal("Operation failed: bad state", exc.Message);
+        }
+
     }
 }
