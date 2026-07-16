@@ -1,11 +1,17 @@
 # csharp-utils-lib package
-C# library - utils, commons, tools and helpers
+C# library of utils, commons and helpers for unifying common code across projects.
 
-For C#
-- Unity 3D (tested)
-- Winforms (tested)
-- WPF (tested)
-etc...
+Aimed at:
+- Unity 3D
+- WinForms
+- WPF
+- .NET Framework 4.8 / .NET Standard 2.0
 
-4.8 .Net compatible
-2.0 .Net standard compatibie
+## Main features
+- Assertion, Retval (return value wrapper), typed exceptions
+- Unit / Quantity with SI prefix conversion
+- Flagword, Singleton, Limited / LimitedNumber
+- Collection, string, object, double and enum extensions
+- Async helpers, Timer, Randomizer, Lipsum generator
+
+Full documentation, roadmap and source on GitHub: https://github.com/vosiz/csharp-utils-lib

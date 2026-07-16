@@ -1,39 +1,70 @@
 # C# Utils library
 Created by Vosiz
 
-Designed for unification and private usage. Feel free to use it as you want
+## Motivation
+Started as a personal grab-bag of small utilities, wrappers and helpers shared across private
+C# projects. Being stabilized into a proper reusable library — usable from Unity as well as
+.NET Framework 4.8 projects — and published as a NuGet package. MIT — use it however you like.
 
-## Content
+## Requirements
+- `netstandard2.0` or `net48`
+
+## Bug tracker
+No tracked issues.
+
+## Features
+See [Roadmap](#roadmap) below for the full list of what's implemented and what's planned.
+
+## Roadmap
+
 ### Root
-- Basic enums
+- [x] Basic enums
 
 ### Commons
-- Assertion
-- Exceptions
-- Retval (Return value)
-- Limited / LimitedNumber (min/max bounded value)
-- Unit / Quantity (with SI prefix conversion)
+- [x] Assertion
+- [x] Exceptions
+- [x] Retval (return value wrapper)
+- [x] Limited / LimitedNumber (min/max bounded value)
+- [x] Unit / Quantity (with SI prefix conversion)
+- [x] Flagword
+- [x] Singleton
+- [ ] Unit conversion between related units (e.g. Kelvin <-> Celsius)
 
 ### Presets
-- Unit (Kelvin, Ampere, Volt, Meter)
-- Quantity (Temperature, Current, Voltage, Length)
+- [x] Unit (Kelvin, Ampere, Volt, Meter)
+- [x] Quantity (Temperature, Current, Voltage, Length)
 
 ### Extensions
-- Binary (byte array)
-- Collections (various)
-- Enums
-- Integer
-- String
+- [x] Binary (byte array)
+- [x] Collections (various)
+- [x] Double
+- [x] Enums
+- [x] Integer
+- [x] Object
+- [x] String
 
 ### Helpers
-- Enums
-- Files
-- Ini
-- Paths
-- Time
-- Xml
+- [x] Enums
+- [x] Files
+- [x] Ini
+- [x] Paths
+- [x] Time
+- [x] Xml
 
 ### Utilities
-- Archive (zip, not recommended yet)
-- Randomizer (randomity driver)
+- [ ] Archive (zip)
+- [x] Async (Run / RunLocked / Repeat)
+- [x] Randomizer
+- [x] Timer
+- [x] Generator (Lipsum)
 
+## Projects
+This repository is a multi-project solution:
+- `CsharpLib` — the library itself, published as the `Vosiz.UtilsLib` NuGet package.
+- `Tests` — reflection-based test runner exercising `CsharpLib`, not published.
+
+## Setup
+Install from NuGet:
+```
+dotnet add package Vosiz.UtilsLib
+```
