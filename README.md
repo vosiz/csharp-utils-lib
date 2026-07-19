@@ -20,6 +20,9 @@ See [Roadmap](#roadmap) below for the full list of what's implemented and what's
 ### Root
 - [x] Basic enums
 
+### Assembly
+- [x] Version (parsing, formatting, compatibility comparison)
+
 ### Commons
 - [x] Assertion
 - [x] Exceptions

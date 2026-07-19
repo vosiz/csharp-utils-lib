@@ -2,6 +2,13 @@
 
 ## Current version
 
+### 2.1.0 - Versioning utility
+- add: Assembly.Version
+- add: VersionCompatibility
+- add: VersionCompatibilityExt.ToBoolean
+
+## History
+
 ### 2.0.0 - Unity / .NET 4.8 stabilization
 - fix: Assert null order
 - add: Assert On*
@@ -22,8 +29,6 @@
 - fix: UseWindowsForms net48
 - fix: ini-parser netstandard
 - docs: README overhaul
-
-## History
 
 ### 1.6.0 - Units and quantities
 - add: Unit, Quantity, SiPrefix
