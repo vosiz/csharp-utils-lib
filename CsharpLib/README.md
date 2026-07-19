@@ -8,6 +8,7 @@ Aimed at:
 - .NET Framework 4.8 / .NET Standard 2.0
 
 ## Main features
+- Version (parsing, formatting, compatibility comparison)
 - Assertion, Retval (return value wrapper), typed exceptions
 - Unit / Quantity with SI prefix conversion
 - Flagword, Singleton, Limited / LimitedNumber
