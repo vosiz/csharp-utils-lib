@@ -2,12 +2,17 @@
 
 ## Current version
 
+### 2.2.0 - Duration formatting
+- add: Commons.Duration
+- add: Duration.AddSeconds
+- add: Duration.ToBreakdownString
+
+## History
+
 ### 2.1.0 - Versioning utility
 - add: Assembly.Version
 - add: VersionCompatibility
 - add: VersionCompatibilityExt.ToBoolean
-
-## History
 
 ### 2.0.0 - Unity / .NET 4.8 stabilization
 - fix: Assert null order

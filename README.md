@@ -31,6 +31,7 @@ See [Roadmap](#roadmap) below for the full list of what's implemented and what's
 - [x] Unit / Quantity (with SI prefix conversion)
 - [x] Flagword
 - [x] Singleton
+- [x] Duration (weeks/days/hours/minutes/seconds breakdown formatting)
 - [ ] Unit conversion between related units (e.g. Kelvin <-> Celsius)
 
 ### Presets
