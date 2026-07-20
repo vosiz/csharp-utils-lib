@@ -14,13 +14,15 @@ namespace Vosiz.Presets
             { "Kelvin", new Commons.Unit("K", Commons.UnitSymbolPlacement.AfterWithSpace, true) },
             { "Ampere", new Commons.Unit("A", Commons.UnitSymbolPlacement.AfterWithSpace, true) },
             { "Volt",   new Commons.Unit("V", Commons.UnitSymbolPlacement.AfterWithSpace, true) },
-            { "Meter",  new Commons.Unit("m", Commons.UnitSymbolPlacement.AfterWithSpace, true) }
+            { "Meter",  new Commons.Unit("m", Commons.UnitSymbolPlacement.AfterWithSpace, true) },
+            { "Second", new Commons.Unit("s", Commons.UnitSymbolPlacement.AfterNoSpace,   true) }
         };
 
         public static Commons.Unit Kelvin => All["Kelvin"];
         public static Commons.Unit Ampere => All["Ampere"];
         public static Commons.Unit Volt => All["Volt"];
         public static Commons.Unit Meter => All["Meter"];
+        public static Commons.Unit Second => All["Second"];
 
     }
 }

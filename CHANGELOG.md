@@ -2,12 +2,19 @@
 
 ## Current version
 
+### 2.2.0 - Duration & time units
+- add: Commons.Duration
+- add: Duration.AddSeconds
+- add: Duration.ToBreakdownString
+- add: Presets.Unit.Second
+- add: Presets.Quantity.Time
+
+## History
+
 ### 2.1.0 - Versioning utility
 - add: Assembly.Version
 - add: VersionCompatibility
 - add: VersionCompatibilityExt.ToBoolean
-
-## History
 
 ### 2.0.0 - Unity / .NET 4.8 stabilization
 - fix: Assert null order

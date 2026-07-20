@@ -11,6 +11,7 @@ Aimed at:
 - Version (parsing, formatting, compatibility comparison)
 - Assertion, Retval (return value wrapper), typed exceptions
 - Unit / Quantity with SI prefix conversion
+- Duration (breakdown formatting: weeks/days/hours/minutes/seconds)
 - Flagword, Singleton, Limited / LimitedNumber
 - Collection, string, object, double and enum extensions
 - Async helpers, Timer, Randomizer, Lipsum generator
