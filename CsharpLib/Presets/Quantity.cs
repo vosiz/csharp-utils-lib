@@ -14,7 +14,8 @@ namespace Vosiz.Presets
             { "Temperature", Unit.Kelvin },
             { "Current",     Unit.Ampere },
             { "Voltage",     Unit.Volt },
-            { "Length",      Unit.Meter }
+            { "Length",      Unit.Meter },
+            { "Time",        Unit.Second }
         };
 
 
@@ -49,6 +50,12 @@ namespace Vosiz.Presets
         public static Commons.Quantity Length(double value) {
 
             return Create("Length", value);
+        }
+
+        // Creates a Time quantity in Second
+        public static Commons.Quantity Time(double value) {
+
+            return Create("Time", value);
         }
 
     }
