@@ -2,10 +2,12 @@
 
 ## Current version
 
-### 2.2.0 - Duration formatting
+### 2.2.0 - Duration & time units
 - add: Commons.Duration
 - add: Duration.AddSeconds
 - add: Duration.ToBreakdownString
+- add: Presets.Unit.Second
+- add: Presets.Quantity.Time
 
 ## History
 

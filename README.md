@@ -35,8 +35,8 @@ See [Roadmap](#roadmap) below for the full list of what's implemented and what's
 - [ ] Unit conversion between related units (e.g. Kelvin <-> Celsius)
 
 ### Presets
-- [x] Unit (Kelvin, Ampere, Volt, Meter)
-- [x] Quantity (Temperature, Current, Voltage, Length)
+- [x] Unit (Kelvin, Ampere, Volt, Meter, Second)
+- [x] Quantity (Temperature, Current, Voltage, Length, Time)
 
 ### Extensions
 - [x] Binary (byte array)
