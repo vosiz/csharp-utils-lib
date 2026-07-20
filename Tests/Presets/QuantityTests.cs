@@ -15,6 +15,7 @@ namespace Tests.Presets
             Check.True(ReferenceEquals(VPresets.Quantity.All["Current"], VPresets.Unit.Ampere), "Current should use Ampere");
             Check.True(ReferenceEquals(VPresets.Quantity.All["Voltage"], VPresets.Unit.Volt), "Voltage should use Volt");
             Check.True(ReferenceEquals(VPresets.Quantity.All["Length"], VPresets.Unit.Meter), "Length should use Meter");
+            Check.True(ReferenceEquals(VPresets.Quantity.All["Time"], VPresets.Unit.Second), "Time should use Second");
         }
 
         // Create builds a Quantity with the preset name, unit and given value
@@ -71,6 +72,24 @@ namespace Tests.Presets
             Check.Equal("Length", quantity.Name);
             Check.True(ReferenceEquals(VPresets.Unit.Meter, quantity.Unit), "Should use Meter");
             Check.Equal(3.0, quantity.Value);
+        }
+
+        // Time shortcut uses Second
+        public static void TimeUsesSecond() {
+
+            VCommons.Quantity quantity = VPresets.Quantity.Time(1.322);
+
+            Check.Equal("Time", quantity.Name);
+            Check.True(ReferenceEquals(VPresets.Unit.Second, quantity.Unit), "Should use Second");
+            Check.Equal(1.322, quantity.Value);
+        }
+
+        // Time formats sub-second values with an SI prefix and no space, e.g. milliseconds
+        public static void TimeFormatsSubSecondWithPrefix() {
+
+            VCommons.Quantity quantity = VPresets.Quantity.Time(0.02);
+
+            Check.Equal("20ms", quantity.ToString(0));
         }
 
     }
