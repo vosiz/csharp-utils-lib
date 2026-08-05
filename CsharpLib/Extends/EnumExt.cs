@@ -44,5 +44,13 @@ namespace Vosiz.Extends
         {
             return (T[])Enum.GetValues(typeof(T));
         }
+
+        // Formats the enum's underlying integer value as a hex string, e.g. "0xFF"
+        public static string ToHexString(this Enum value)
+        {
+            Assert.OnNull(value);
+
+            return "0x" + Convert.ToInt32(value).ToString("X");
+        }
     }
 }

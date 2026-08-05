@@ -50,5 +50,23 @@ namespace Tests.Helpers
             Check.Equal(42, result.Value);
         }
 
+        // IsValid returns true for well-formed XML
+        public static void IsValidReturnsTrueForWellFormedXml() {
+
+            Check.True(XmlHelper.IsValid("<root><child>value</child></root>"), "should be valid XML");
+        }
+
+        // IsValid returns false for malformed XML
+        public static void IsValidReturnsFalseForMalformedXml() {
+
+            Check.False(XmlHelper.IsValid("<root><child></root>"), "should be invalid XML");
+        }
+
+        // IsValid returns false for an empty string
+        public static void IsValidReturnsFalseForEmptyString() {
+
+            Check.False(XmlHelper.IsValid(string.Empty), "empty string should not be valid XML");
+        }
+
     }
 }

@@ -27,5 +27,19 @@ namespace Vosiz.Extends
             else
                 return Math.Min(value + rate, target);
         }
+
+        // Converts degrees to radians
+        public static double ToRadians(this double degrees)
+        {
+
+            return degrees * (Math.PI / 180);
+        }
+
+        // Converts radians to degrees
+        public static double ToDegrees(this double radians)
+        {
+
+            return radians * (180 / Math.PI);
+        }
     }
 }
