@@ -71,5 +71,37 @@ namespace Tests.Extends
             Check.False(ok, "Should fail for an incompatible value");
         }
 
+        // As returns the converted value for a compatible type
+        public static void AsReturnsConvertedValueForCompatibleType() {
+
+            object value = "42";
+
+            Check.Equal(42, value.As(-1));
+        }
+
+        // As returns the fallback for an incompatible value
+        public static void AsReturnsFallbackForIncompatibleValue() {
+
+            object value = "not a number";
+
+            Check.Equal(-1, value.As(-1));
+        }
+
+        // As returns the fallback for a null value type
+        public static void AsReturnsFallbackForNullOnValueType() {
+
+            object value = null;
+
+            Check.Equal(7, value.As(7));
+        }
+
+        // As returns default (null) for a null reference type without an explicit fallback
+        public static void AsReturnsDefaultForNullOnReferenceType() {
+
+            object value = null;
+
+            Check.Equal(null, value.As<string>());
+        }
+
     }
 }

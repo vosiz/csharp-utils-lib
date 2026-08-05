@@ -62,6 +62,46 @@ namespace Tests.Extends
             Check.Equal(string.Empty, "abc".RandomSubstring(10));
         }
 
+        // SplitByLength splits into equal chunks
+        public static void SplitByLengthSplitsIntoEqualChunks() {
+
+            string[] chunks = "abcdef".SplitByLength(2);
+
+            Check.Equal(3, chunks.Length);
+            Check.Equal("ab", chunks[0]);
+            Check.Equal("cd", chunks[1]);
+            Check.Equal("ef", chunks[2]);
+        }
+
+        // SplitByLength leaves the last chunk shorter when it does not divide evenly
+        public static void SplitByLengthLastChunkIsShorter() {
+
+            string[] chunks = "abcde".SplitByLength(2);
+
+            Check.Equal(3, chunks.Length);
+            Check.Equal("e", chunks[2]);
+        }
+
+        // SplitByLength throws for an empty string
+        public static void SplitByLengthThrowsForEmptyString() {
+
+            Check.Throws<ArgumentException>(() => string.Empty.SplitByLength(2));
+        }
+
+        // SplitByLength throws for a null string
+        public static void SplitByLengthThrowsForNull() {
+
+            string value = null;
+
+            Check.Throws<ArgumentException>(() => value.SplitByLength(2));
+        }
+
+        // SplitByLength throws for a non-positive length
+        public static void SplitByLengthThrowsForNonPositiveLength() {
+
+            Check.Throws<ArgumentException>(() => "abc".SplitByLength(0));
+        }
+
         // TryParseEnum parses a valid value
         public static void TryParseEnumParsesValidValue() {
 
