@@ -2,6 +2,18 @@
 
 ## Current version
 
+### 2.4.0 - Misc helpers & AssemblyInfo
+- add: DoubleExt.ToRadians
+- add: DoubleExt.ToDegrees
+- add: Randomizer.ShortGuid
+- add: XmlHelper.IsValid
+- add: StringExt.SplitByLength
+- add: EnumExt.ToHexString
+- add: ObjectExt.As<T>
+- add: Assembly.AssemblyInfo
+
+## History
+
 ### 2.3.0 - String casing extensions
 - add: StringExt.ToPascalCase
 - add: StringExt.ToCamelCase
@@ -11,8 +23,6 @@
 - add: StringExt.ToModuleCase
 - add: StringExt.ToCapsLock
 - add: StringExt.ToCapital
-
-## History
 
 ### 2.2.0 - Duration & time units
 - add: Commons.Duration
