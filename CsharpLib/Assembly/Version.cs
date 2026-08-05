@@ -15,13 +15,10 @@ namespace Vosiz.Assembly
     public class VersionParseException : Exception
     {
 
-        public VersionParseException() :
-            base("Failed to parse version.")
-        { }
+        public VersionParseException() : base("Failed to parse version.") { }
 
         public VersionParseException(string value, string format, Exception inner_exc) :
-            base(string.Format("Failed to parse version \"{0}\" using format \"{1}\": {2}", value, format, inner_exc.Message), inner_exc)
-        { }
+            base(string.Format("Failed to parse version \"{0}\" using format \"{1}\": {2}", value, format, inner_exc.Message), inner_exc) { }
 
     }
 

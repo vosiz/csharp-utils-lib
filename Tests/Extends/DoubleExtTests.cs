@@ -43,5 +43,35 @@ namespace Tests.Extends
             Check.Equal(7.0, 10.0.Lerp(5.0, 3.0));
         }
 
+        // ToRadians converts a known angle
+        public static void ToRadiansConvertsKnownAngle() {
+
+            Check.Equal(Math.PI, 180.0.ToRadians());
+        }
+
+        // ToRadians of zero is zero
+        public static void ToRadiansConvertsZero() {
+
+            Check.Equal(0.0, 0.0.ToRadians());
+        }
+
+        // ToDegrees converts a known angle
+        public static void ToDegreesConvertsKnownAngle() {
+
+            Check.Equal(90.0, (Math.PI / 2).ToDegrees());
+        }
+
+        // ToDegrees of zero is zero
+        public static void ToDegreesConvertsZero() {
+
+            Check.Equal(0.0, 0.0.ToDegrees());
+        }
+
+        // ToRadians followed by ToDegrees returns the original value
+        public static void ToRadiansAndToDegreesRoundTrip() {
+
+            Check.Equal(45.0, 45.0.ToRadians().ToDegrees());
+        }
+
     }
 }

@@ -15,6 +15,11 @@ namespace Tests.Extends
         Second
     }
 
+    public enum SampleHexEnum
+    {
+        Value = 255
+    }
+
     public static class EnumExtTests
     {
 
@@ -46,6 +51,20 @@ namespace Tests.Extends
             Check.Equal(2, values.Count);
             Check.True(values.Contains(SampleDescribedEnum.First), "Missing First");
             Check.True(values.Contains(SampleDescribedEnum.Second), "Missing Second");
+        }
+
+        // ToHexString formats the underlying value as hex
+        public static void ToHexStringFormatsValueAsHex() {
+
+            Check.Equal("0xFF", SampleHexEnum.Value.ToHexString());
+        }
+
+        // ToHexString throws for a null enum value
+        public static void ToHexStringThrowsForNull() {
+
+            Enum value = null;
+
+            Check.Throws<AssertException>(() => value.ToHexString());
         }
 
     }

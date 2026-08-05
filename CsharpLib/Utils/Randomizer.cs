@@ -73,6 +73,13 @@ namespace Vosiz.Utils
             return new string(Enumerable.Range(0, length).Select(_ => NextChar()).ToArray());
         }
 
+        // Returns a short id: the first 8 hex characters of a new GUID
+        public static string ShortGuid()
+        {
+
+            return Guid.NewGuid().ToString().Split('-')[0];
+        }
+
         public static decimal NextDecimal(decimal min = 0, decimal max = 1)
         {
             if (min > max)

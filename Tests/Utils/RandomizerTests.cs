@@ -165,5 +165,23 @@ namespace Tests.Utils
             Check.Equal(42, Randomizer.Choice(42));
         }
 
+        // ShortGuid returns 8 hex characters
+        public static void ShortGuidReturnsEightHexCharacters() {
+
+            string value = Randomizer.ShortGuid();
+
+            Check.Equal(8, value.Length);
+            Check.True(value.All(c => Uri.IsHexDigit(c)), "value should be all hex digits");
+        }
+
+        // ShortGuid returns different values on repeated calls
+        public static void ShortGuidReturnsDifferentValuesOnRepeatedCalls() {
+
+            string first = Randomizer.ShortGuid();
+            string second = Randomizer.ShortGuid();
+
+            Check.False(first == second, "two calls should not produce the same short guid");
+        }
+
     }
 }

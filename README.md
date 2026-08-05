@@ -22,6 +22,7 @@ See [Roadmap](#roadmap) below for the full list of what's implemented and what's
 
 ### Assembly
 - [x] Version (parsing, formatting, compatibility comparison)
+- [x] AssemblyInfo (OS, production/debug flag, label, build id)
 
 ### Commons
 - [x] Assertion

@@ -61,5 +61,17 @@ namespace Vosiz.Extends
             result = default;
             return false;
         }
+
+        // Attempts to convert the object to T, returning fallback if the conversion fails
+        public static T As<T>(this object obj, T fallback = default)
+        {
+
+            object result;
+
+            if (obj.TryConvert(typeof(T), out result))
+                return (T)result;
+
+            return fallback;
+        }
     }
 }

@@ -8,7 +8,7 @@ Aimed at:
 - .NET Framework 4.8 / .NET Standard 2.0
 
 ## Main features
-- Version (parsing, formatting, compatibility comparison)
+- Version / AssemblyInfo (parsing, formatting, compatibility comparison, assembly metadata)
 - Assertion, Retval (return value wrapper), typed exceptions
 - Unit / Quantity with SI prefix conversion
 - Duration (breakdown formatting: weeks/days/hours/minutes/seconds)

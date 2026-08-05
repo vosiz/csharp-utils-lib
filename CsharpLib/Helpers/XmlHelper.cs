@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 using System.Xml.Serialization;
 
 namespace Vosiz.Helpers
@@ -51,6 +52,22 @@ namespace Vosiz.Helpers
             catch (Exception exc)
             {
                 throw exc;
+            }
+        }
+
+        // Checks whether the string is valid XML, without throwing
+        public static bool IsValid(string xml)
+        {
+
+            try
+            {
+                var doc = new XmlDocument();
+                doc.LoadXml(xml);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
             }
         }
     }

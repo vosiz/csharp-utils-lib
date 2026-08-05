@@ -41,6 +41,29 @@ namespace Vosiz.Extends
             return str.Substring(index, length);
         }
 
+        // Splits the string into fixed-length chunks; the last chunk may be shorter
+        public static string[] SplitByLength(this string str, int length)
+        {
+
+            if (string.IsNullOrEmpty(str))
+                throw new ArgumentException("String cannot be null or empty.", nameof(str));
+
+            if (length <= 0)
+                throw new ArgumentException("Length must be greater than zero.", nameof(length));
+
+            int chunk_count = (int)Math.Ceiling((double)str.Length / length);
+            string[] chunks = new string[chunk_count];
+
+            for (int i = 0; i < chunk_count; i++)
+            {
+                int start = i * length;
+                int chunk_length = Math.Min(length, str.Length - start);
+                chunks[i] = str.Substring(start, chunk_length);
+            }
+
+            return chunks;
+        }
+
         // Attempts to parse the string as an enum value of the given type, without throwing
         public static bool TryParseEnum(this string value, Type enum_type, bool ignore_case, out object result)
         {
