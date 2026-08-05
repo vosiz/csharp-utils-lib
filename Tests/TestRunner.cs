@@ -9,7 +9,7 @@ namespace Tests
     {
 
         // Runs every public static parameterless void method found on any *Tests class in the given assembly
-        public static void RunAll(Assembly assembly) {
+        public static void RunAll(System.Reflection.Assembly assembly) {
 
             var test_classes = assembly.GetTypes()
                 .Where(t => t.IsClass && t.IsAbstract && t.IsSealed && t.Name.EndsWith("Tests"))

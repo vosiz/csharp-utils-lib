@@ -7,7 +7,7 @@ namespace Tests
     {
         static void Main(string[] args)
         {
-            TestRunner.RunAll(Assembly.GetExecutingAssembly());
+            TestRunner.RunAll(System.Reflection.Assembly.GetExecutingAssembly());
 
             Console.ReadLine();
         }
