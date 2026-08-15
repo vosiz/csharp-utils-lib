@@ -2,6 +2,15 @@
 
 ## Current version
 
+### 2.5.0 - Logger module
+- add: Logger.LogEntry
+- add: Logger.LogConfig
+- add: Logger.LogWriter
+- add: Logger.LogReader
+- add: Logger.Log
+
+## History
+
 ### 2.4.0 - Misc helpers & AssemblyInfo
 - add: DoubleExt.ToRadians
 - add: DoubleExt.ToDegrees
@@ -11,8 +20,6 @@
 - add: EnumExt.ToHexString
 - add: ObjectExt.As<T>
 - add: Assembly.AssemblyInfo
-
-## History
 
 ### 2.3.0 - String casing extensions
 - add: StringExt.ToPascalCase

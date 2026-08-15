@@ -9,6 +9,7 @@ Aimed at:
 
 ## Main features
 - Version / AssemblyInfo (parsing, formatting, compatibility comparison, assembly metadata)
+- Logger (file/console logging with severity, folder-based reading with filtering)
 - Assertion, Retval (return value wrapper), typed exceptions
 - Unit / Quantity with SI prefix conversion
 - Duration (breakdown formatting: weeks/days/hours/minutes/seconds)
