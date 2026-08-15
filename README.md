@@ -39,6 +39,13 @@ See [Roadmap](#roadmap) below for the full list of what's implemented and what's
 - [x] Unit (Kelvin, Ampere, Volt, Meter, Second)
 - [x] Quantity (Temperature, Current, Voltage, Length, Time)
 
+### Logger
+- [x] LogEntry (model)
+- [x] LogConfig (severity threshold, output targets, on-disk format)
+- [x] LogWriter (file / console)
+- [x] LogReader (folder scan, severity / date-range filtering)
+- [x] Log (static facade)
+
 ### Extensions
 - [x] Binary (byte array)
 - [x] Collections (various)
