@@ -2,14 +2,18 @@
 
 ## Current version
 
+### 2.5.1 - Severity extension
+- extension for: Severity (Trace, Verbose, Any, All)
+- extension for: Logger uses description
+
+## History
+
 ### 2.5.0 - Logger module
 - add: Logger.LogEntry
 - add: Logger.LogConfig
 - add: Logger.LogWriter
 - add: Logger.LogReader
 - add: Logger.Log
-
-## History
 
 ### 2.4.0 - Misc helpers & AssemblyInfo
 - add: DoubleExt.ToRadians
