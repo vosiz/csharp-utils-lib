@@ -35,7 +35,7 @@ namespace Tests.Logger
             var timestamp = new DateTime(2026, 8, 15, 12, 0, 0, 500);
             var entry = new LogEntry(timestamp, Severity.Error, "boom");
 
-            Check.Equal("2026-08-15 12:00:00.500 | Error | boom", entry.ToString());
+            Check.Equal("2026-08-15 12:00:00.500 | ERR | boom", entry.ToString());
         }
 
         // TryParse round-trips a line produced by ToString back into an equal entry
@@ -79,6 +79,31 @@ namespace Tests.Logger
             Check.False(ok, "TryParse should fail for an invalid level");
         }
 
+        // TryParse rejects the old full enum name
+        public static void TryParseFailsForFullEnumName() {
+
+            LogEntry parsed;
+            bool ok = LogEntry.TryParse("2026-08-15 12:00:00.500 | Error | boom", out parsed);
+
+            Check.False(ok, "TryParse should fail for the full enum name");
+        }
+
+        // TryParse round-trips every Severity value
+        public static void TryParseRoundTripsEverySeverityValue() {
+
+            foreach (Severity level in Enum.GetValues(typeof(Severity)))
+            {
+
+                var original = new LogEntry(new DateTime(2026, 8, 15, 12, 0, 0, 500), level, "boom");
+
+                LogEntry parsed;
+                bool ok = LogEntry.TryParse(original.ToString(), out parsed);
+
+                Check.True(ok, "TryParse should succeed for level " + level);
+                Check.Equal(level, parsed.Level);
+            }
+        }
+
         // TryParse fails for an unparsable timestamp
         public static void TryParseFailsForInvalidTimestamp() {
 
@@ -95,7 +120,7 @@ namespace Tests.Logger
             var entry = new LogEntry(timestamp, Severity.Error, "boom");
             var config = new LogConfig(timestamp_format: "yyyy-MM-dd", separator: " :: ");
 
-            Check.Equal("2026-08-15 :: Error :: boom", entry.Format(config));
+            Check.Equal("2026-08-15 :: ERR :: boom", entry.Format(config));
         }
 
         // TryParse(line, LogConfig, out) round-trips a line produced by Format(config) using that same config
