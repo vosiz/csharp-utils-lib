@@ -1,6 +1,7 @@
 using System;
 using System.Globalization;
 using Vosiz.Commons;
+using Vosiz.Extends;
 using Severity = Vosiz.Enums.Severity;
 
 namespace Vosiz.Logger
@@ -49,13 +50,30 @@ namespace Vosiz.Logger
                 return false;
 
             Severity level;
-            if (!Enum.TryParse(parts[1], out level))
+            if (!TryParseLevel(parts[1], out level))
                 return false;
 
             entry = new LogEntry(timestamp, level, parts[2]);
             return true;
         }
 
+        // Reverse-maps a description back to its Severity value
+        private static bool TryParseLevel(string description, out Severity level)
+        {
+
+            foreach (Severity candidate in Enum.GetValues(typeof(Severity)))
+            {
+
+                if (candidate.GetDescription() == description)
+                {
+                    level = candidate;
+                    return true;
+                }
+            }
+
+            level = default(Severity);
+            return false;
+        }
 
         // Constructor with an explicit timestamp, used when reconstructing entries from disk
         public LogEntry(DateTime timestamp, Severity level, string message)
@@ -93,7 +111,7 @@ namespace Vosiz.Logger
         private string Format(string timestamp_format, string separator)
         {
 
-            return string.Format("{0}{3}{1}{3}{2}", Timestamp.ToString(timestamp_format), Level, Message, separator);
+            return string.Format("{0}{3}{1}{3}{2}", Timestamp.ToString(timestamp_format), Level.GetDescription(), Message, separator);
         }
 
     }
