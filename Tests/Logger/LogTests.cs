@@ -31,7 +31,7 @@ namespace Tests.Logger
             Log.Error("boom");
 
             string[] lines = File.ReadAllLines(Log.Config.FilePath);
-            Check.True(lines[0].Contains("Error"), "Line should contain the Error level");
+            Check.True(lines[0].Contains("ERR"), "Line should contain the Error level");
             Check.True(lines[0].Contains("boom"), "Line should contain the message");
 
             CleanupDir(dir);
