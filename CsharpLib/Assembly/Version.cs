@@ -201,5 +201,23 @@ namespace Vosiz.Assembly
             return VersionCompatibility.Compatible;
         }
 
+        // True when this version is older than required
+        public bool RequiresUpdate(Version required)
+        {
+
+            Assert.OnNull(required);
+
+            if (Major != required.Major)
+                return Major < required.Major;
+
+            if (Minor != required.Minor)
+                return Minor < required.Minor;
+
+            if (Patch != required.Patch)
+                return Patch < required.Patch;
+
+            return Revision < required.Revision;
+        }
+
     }
 }
