@@ -2,11 +2,18 @@
 
 ## Current version
 
+### 2.6.0 - Platform detection & version compatibility
+- add: Enums.PlatformOS
+- add: Assembly.PlatformInfo
+- extension for: AssemblyInfo.ToString/ToFullString
+- extension for: Version.RequiresUpdate
+- extension for: Test runner counter/colors
+
+## History
+
 ### 2.5.1 - Severity extension
 - extension for: Severity (Trace, Verbose, Any, All)
 - extension for: Logger uses description
-
-## History
 
 ### 2.5.0 - Logger module
 - add: Logger.LogEntry
