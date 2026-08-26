@@ -21,8 +21,9 @@ See [Roadmap](#roadmap) below for the full list of what's implemented and what's
 - [x] Basic enums
 
 ### Assembly
-- [x] Version (parsing, formatting, compatibility comparison)
-- [x] AssemblyInfo (OS, production/debug flag, label, build id)
+- [x] Version (parsing, formatting, compatibility comparison, update check)
+- [x] AssemblyInfo (OS, production/debug flag, label, build id, Simple/Full descriptor)
+- [x] PlatformInfo (overridable OS platform detection)
 
 ### Commons
 - [x] Assertion
