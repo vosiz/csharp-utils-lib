@@ -15,35 +15,53 @@ namespace Tests
                 .Where(t => t.IsClass && t.IsAbstract && t.IsSealed && t.Name.EndsWith("Tests"))
                 .OrderBy(t => t.FullName);
 
+            var tests = test_classes
+                .SelectMany(test_class => test_class.GetMethods(BindingFlags.Public | BindingFlags.Static)
+                    .Where(m => m.GetParameters().Length == 0 && m.ReturnType == typeof(void))
+                    .OrderBy(m => m.Name)
+                    .Select(method => new { Class = test_class, Method = method }))
+                .ToList();
+
+            int cap = tests.Count;
+            int index = 0;
             int passed = 0;
             int failed = 0;
 
-            foreach (var test_class in test_classes) {
+            foreach (var test in tests) {
 
-                var methods = test_class.GetMethods(BindingFlags.Public | BindingFlags.Static)
-                    .Where(m => m.GetParameters().Length == 0 && m.ReturnType == typeof(void))
-                    .OrderBy(m => m.Name);
+                index++;
 
-                foreach (var method in methods) {
+                string name = string.Format("{0}.{1}", test.Class.FullName, test.Method.Name);
+                string counter = string.Format("{0,4}/{1,4}", index, cap);
 
-                    string name = string.Format("{0}.{1}", test_class.FullName, method.Name);
+                try {
 
-                    try {
+                    test.Method.Invoke(null, null);
+                    Console.WriteLine(string.Format("{0} [PASS] {1}", counter, name));
+                    passed++;
 
-                        method.Invoke(null, null);
-                        Console.WriteLine(string.Format("[PASS] {0}", name));
-                        passed++;
+                } catch (TargetInvocationException exc) {
 
-                    } catch (TargetInvocationException exc) {
-
-                        Console.WriteLine(string.Format("[FAIL] {0} - {1}", name, exc.InnerException?.Message));
-                        failed++;
-                    }
+                    Console.WriteLine(string.Format("{0} [FAIL] {1}", counter, name));
+                    WriteFailure(exc.InnerException ?? exc);
+                    failed++;
                 }
             }
 
             Console.WriteLine();
             Console.WriteLine(string.Format("Passed: {0}, Failed: {1}", passed, failed));
+        }
+
+        // Prints a failed test's exception in red, its inner exception below as a "-" bullet
+        private static void WriteFailure(Exception exc) {
+
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine(exc.Message);
+
+            if (exc.InnerException != null)
+                Console.WriteLine(string.Format("- {0}", exc.InnerException.Message));
+
+            Console.ResetColor();
         }
 
     }
