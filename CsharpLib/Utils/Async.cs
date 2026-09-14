@@ -26,7 +26,7 @@ namespace Vosiz.Utils
             {
 
                 SemaphoreSlim[] semaphores = locks.Length > 0 ?
-                    locks.Select(l => LockMap.GetOrAdd(l, _ => new SemaphoreSlim(1, 1))).ToArray() :
+                    locks.Select(l => LockMap.GetOrAdd(l, key => new SemaphoreSlim(1, 1))).ToArray() :
                     DefaultLock;
 
                 Array.Sort(semaphores, (a, b) => RuntimeHelpers.GetHashCode(a).CompareTo(RuntimeHelpers.GetHashCode(b)));
@@ -171,7 +171,7 @@ namespace Vosiz.Utils
             var cts = new CancellationTokenSource();
             var token = cts.Token;
 
-            _ = Run(() =>
+            var loop_task = Run(() =>
             {
                 while (!token.IsCancellationRequested)
                 {
@@ -192,9 +192,9 @@ namespace Vosiz.Utils
             var cts = new CancellationTokenSource();
             var token = cts.Token;
 
-            _ = Run(() =>
+            var loop_task = Run(() =>
             {
-                _ = Run(async () =>
+                var inner_task = Run(async () =>
                 {
                     while (!token.IsCancellationRequested)
                     {

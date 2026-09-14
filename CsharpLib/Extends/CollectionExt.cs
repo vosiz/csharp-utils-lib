@@ -9,7 +9,7 @@ namespace Vosiz.Extends
     public static class CollectionExt
     {
 
-        /// IEnumerable
+        // IEnumerable extensions
         public static T RandomValue<T>(this IEnumerable<T> collection)
         {
             if (collection == null)
@@ -68,7 +68,7 @@ namespace Vosiz.Extends
             return list[next_index];
         }
 
-        /// dictionaries
+        // Dictionary extensions
         public static bool TryAdd<TKey, TValue>(this Dictionary<TKey, TValue> dict, TKey key, TValue val, bool update = false)
         {
 

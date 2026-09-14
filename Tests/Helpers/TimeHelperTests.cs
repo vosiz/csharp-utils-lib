@@ -13,7 +13,7 @@ namespace Tests.Helpers
 
             string result = TimeHelper.Now(@"hh\:mm\:ss");
 
-            Check.True(TimeSpan.TryParseExact(result, @"hh\:mm\:ss", CultureInfo.InvariantCulture, out _), "Now() result should parse back as a TimeSpan");
+            Check.True(TimeSpan.TryParseExact(result, @"hh\:mm\:ss", CultureInfo.InvariantCulture, out TimeSpan parsed), "Now() result should parse back as a TimeSpan");
         }
 
         // Today formats the current date and time using the given format
@@ -21,7 +21,7 @@ namespace Tests.Helpers
 
             string result = TimeHelper.Today("yyyy-MM-dd");
 
-            Check.True(DateTime.TryParseExact(result, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out _), "Today() result should parse back as a DateTime");
+            Check.True(DateTime.TryParseExact(result, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime parsed), "Today() result should parse back as a DateTime");
         }
 
         // Timestamp formats the current date and time using the given format
@@ -29,7 +29,7 @@ namespace Tests.Helpers
 
             string result = TimeHelper.Timestamp("yyyy-MM-dd");
 
-            Check.True(DateTime.TryParseExact(result, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out _), "Timestamp() result should parse back as a DateTime");
+            Check.True(DateTime.TryParseExact(result, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime parsed), "Timestamp() result should parse back as a DateTime");
         }
 
         // EpochTime returns a value close to the current Unix time

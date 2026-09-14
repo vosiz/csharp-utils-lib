@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using Vosiz.Utils;
 
 namespace Vosiz.Extends
@@ -76,7 +74,7 @@ namespace Vosiz.Extends
                 result = Enum.Parse(enum_type, value, ignore_case);
                 return true;
             }
-            catch
+            catch (Exception)
             {
                 result = null;
                 return false;

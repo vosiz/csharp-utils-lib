@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Threading;
 using Vosiz.Logger;
 using Severity = Vosiz.Enums.Severity;
 
@@ -115,6 +116,50 @@ namespace Tests.Logger
             }
 
             Check.Equal("", captured.ToString());
+        }
+
+        // Write from many threads at once does not throw and every line lands in the file
+        public static void WriteFromMultipleThreadsDoesNotThrow() {
+
+            const int THREAD_COUNT = 8;
+            const int WRITES_PER_THREAD = 25;
+
+            string dir = TempDir();
+            var config = new LogConfig(min_level: Severity.Info, directory: dir);
+            config.WriteToFile = true;
+            var writer = new LogWriter(config);
+
+            Exception caught = null;
+            var threads = new Thread[THREAD_COUNT];
+
+            for (int t = 0; t < THREAD_COUNT; t++) {
+
+                threads[t] = new Thread(() => {
+
+                    try {
+
+                        for (int i = 0; i < WRITES_PER_THREAD; i++)
+                            writer.Write(Severity.Info, "concurrent");
+
+                    } catch (Exception exc) {
+
+                        caught = exc;
+                    }
+                });
+            }
+
+            foreach (var thread in threads)
+                thread.Start();
+
+            foreach (var thread in threads)
+                thread.Join();
+
+            Check.True(caught == null, caught != null ? caught.Message : "");
+
+            string[] lines = File.ReadAllLines(config.FilePath);
+            Check.Equal(THREAD_COUNT * WRITES_PER_THREAD, lines.Length);
+
+            CleanupDir(dir);
         }
 
         // Creates a unique, not-yet-existing temp directory path for a single test
