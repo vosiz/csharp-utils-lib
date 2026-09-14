@@ -1,8 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Vosiz.Extends
 {
@@ -56,7 +52,7 @@ namespace Vosiz.Extends
                     return true;
                 }
             }
-            catch { }
+            catch (Exception) { }
 
             result = default;
             return false;

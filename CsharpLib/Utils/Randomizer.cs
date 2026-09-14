@@ -4,8 +4,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Vosiz.Utils
 {
@@ -70,7 +68,7 @@ namespace Vosiz.Utils
 
         public static string NextString(int length = 10)
         {
-            return new string(Enumerable.Range(0, length).Select(_ => NextChar()).ToArray());
+            return new string(Enumerable.Range(0, length).Select(i => NextChar()).ToArray());
         }
 
         // Returns a short id: the first 8 hex characters of a new GUID
@@ -181,65 +179,65 @@ namespace Vosiz.Utils
 
             if (type.IsArray)
             {
-                Type elementType = type.GetElementType();
+                Type element_type = type.GetElementType();
                 int length = Next(5, 10);
-                Array array = Array.CreateInstance(elementType, length);
+                Array array = Array.CreateInstance(element_type, length);
                 for (int i = 0; i < length; i++)
                 {
-                    array.SetValue(GenerateRandom(elementType, depth + 1), i);
+                    array.SetValue(GenerateRandom(element_type, depth + 1), i);
                 }
                 return array;
             }
 
             if (type.IsGenericType)
             {
-                var genericTypeDef = type.GetGenericTypeDefinition();
+                var generic_type_def = type.GetGenericTypeDefinition();
                 var args = type.GetGenericArguments();
 
-                if (genericTypeDef == typeof(List<>))
+                if (generic_type_def == typeof(List<>))
                 {
-                    var elementType = args[0];
+                    var element_type = args[0];
                     var list = (IList)Activator.CreateInstance(type);
                     int count = Next(5, 10);
                     for (int i = 0; i < count; i++)
                     {
-                        list.Add(GenerateRandom(elementType, depth + 1));
+                        list.Add(GenerateRandom(element_type, depth + 1));
                     }
                     return list;
                 }
 
-                if (genericTypeDef == typeof(IEnumerable<>))
+                if (generic_type_def == typeof(IEnumerable<>))
                 {
-                    var elementType = args[0];
-                    var listType = typeof(List<>).MakeGenericType(elementType);
-                    return GenerateRandom(listType, depth + 1);
+                    var element_type = args[0];
+                    var list_type = typeof(List<>).MakeGenericType(element_type);
+                    return GenerateRandom(list_type, depth + 1);
                 }
 
-                if (genericTypeDef == typeof(Dictionary<,>))
+                if (generic_type_def == typeof(Dictionary<,>))
                 {
-                    var keyType = args[0];
-                    var valueType = args[1];
+                    var key_type = args[0];
+                    var value_type = args[1];
                     var dict = (IDictionary)Activator.CreateInstance(type);
                     int count = Next(5, 10);
                     for (int i = 0; i < count; i++)
                     {
-                        var key = GenerateRandom(keyType, depth + 1);
-                        var value = GenerateRandom(valueType, depth + 1);
+                        var key = GenerateRandom(key_type, depth + 1);
+                        var value = GenerateRandom(value_type, depth + 1);
                         if (!dict.Contains(key))
                             dict.Add(key, value);
                     }
                     return dict;
                 }
 
-                if (genericTypeDef == typeof(ObservableCollection<>))
+                if (generic_type_def == typeof(ObservableCollection<>))
                 {
-                    var elementType = args[0];
-                    var collectionType = typeof(ObservableCollection<>).MakeGenericType(elementType);
-                    var collection = (IList)Activator.CreateInstance(collectionType);
+                    var element_type = args[0];
+                    var collection_type = typeof(ObservableCollection<>).MakeGenericType(element_type);
+                    var collection = (IList)Activator.CreateInstance(collection_type);
                     int count = Next(5, 10);
                     for (int i = 0; i < count; i++)
                     {
-                        collection.Add(GenerateRandom(elementType, depth + 1));
+                        collection.Add(GenerateRandom(element_type, depth + 1));
                     }
                     return collection;
                 }
@@ -269,7 +267,7 @@ namespace Vosiz.Utils
                             SetInitOnlyProperty(instance, prop, value);
                         }
                     }
-                    catch { }
+                    catch (Exception) { }
                 }
 
                 return instance;
@@ -280,10 +278,10 @@ namespace Vosiz.Utils
 
         private static void SetInitOnlyProperty(object target, PropertyInfo property, object value)
         {
-            var backingField = target.GetType().GetField($"<{property.Name}>k__BackingField",
+            var backing_field = target.GetType().GetField($"<{property.Name}>k__BackingField",
                 BindingFlags.Instance | BindingFlags.NonPublic);
 
-            backingField?.SetValue(target, value);
+            backing_field?.SetValue(target, value);
         }
 
         private static object GetDefaultValue(Type type)

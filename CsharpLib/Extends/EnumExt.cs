@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using Vosiz.Commons;
 
 namespace Vosiz.Extends
@@ -40,7 +37,7 @@ namespace Vosiz.Extends
 
         }
 
-        public static IEnumerable<T> GetAll<T>(this T _) where T : Enum
+        public static IEnumerable<T> GetAll<T>(this T instance) where T : Enum
         {
             return (T[])Enum.GetValues(typeof(T));
         }
