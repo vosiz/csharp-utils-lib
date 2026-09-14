@@ -11,6 +11,9 @@ namespace Vosiz.Logger
 
         public LogConfig Config { private set; get; }
 
+        // Serializes concurrent writes to the log file across threads
+        private readonly object FileLock = new object();
+
 
         // Constructor with the config driving where/whether/how entries are written
         public LogWriter(LogConfig config)
@@ -44,8 +47,11 @@ namespace Vosiz.Logger
         private void WriteToFile(string line)
         {
 
-            Directory.CreateDirectory(Config.Directory);
-            File.AppendAllText(Config.FilePath, line + Environment.NewLine);
+            lock (FileLock)
+            {
+                Directory.CreateDirectory(Config.Directory);
+                File.AppendAllText(Config.FilePath, line + Environment.NewLine);
+            }
         }
 
     }
